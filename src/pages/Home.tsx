@@ -1,13 +1,14 @@
 import { useLoaderData } from "react-router-dom";
+import ContentContainer from "../components/container/ContentContainer";
 
 const Home = () => {
-  const allCategory = useLoaderData();
-
-  console.log(allCategory);
+  // const allCategory = useLoaderData();
 
   return (
-    <div>
-      <h1>Home Page</h1>
+    <div className="bg-black/80 text-white">
+      <ContentContainer>
+        <h1>Home Page</h1>
+      </ContentContainer>
     </div>
   );
 };
