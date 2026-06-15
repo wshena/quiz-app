@@ -1,12 +1,36 @@
-import { Routes, Route } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import About from "../pages/About";
 import Home from "../pages/Home";
+// import Navbar from "../components/Navbar";
+import { GetAllQuizCategory } from "../../utils/fetcher";
 
-export default function AppRoutes() {
+const RootLayout = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-    </Routes>
+    <>
+      {/* <Navbar /> */}
+      <main>
+        <Outlet />
+      </main>
+    </>
   );
-}
+};
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+        loader: async () => {
+          return await GetAllQuizCategory();
+        },
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+    ],
+  },
+]);
